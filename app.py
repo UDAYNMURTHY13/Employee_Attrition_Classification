@@ -16,7 +16,7 @@ def load_model():
     with open('models/feature_names.pkl', 'rb') as f:
         feature_names = pickle.load(f)
 
-return model, scaler, feature_names
+    return model, scaler, feature_names
 
 model, scaler, feature_names = load_model()
 
