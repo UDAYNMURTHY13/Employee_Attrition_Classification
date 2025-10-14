@@ -80,24 +80,6 @@ You can try the live demo below 👇
 - **Streamlit**
 
 ---
-
-## 📂 Project Structure
-
-Employee_Attrition_Classification/
-│
-├── data/
-│ └── employee_data.csv
-│
-├── models/
-│ └── attrition_model.pkl
-│
-├── Employee_Attrition_Classification.ipynb
-│
-└── README.md
-
-
----
-
 ## 📈 Results & Insights
 - **Best Model:** Random Forest (AUC = 0.91)  
 - **Key Attrition Drivers:**  
