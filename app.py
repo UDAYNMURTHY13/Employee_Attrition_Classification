@@ -7,15 +7,14 @@ import pandas as pd
 # Load model, scaler, and feature names
 @st.cache_resource
 def load_model():
-    with open('models\best_attrition_model.pkl', 'rb') as f:
-        model = pickle.load(f)
-    
+    with open('models/best_attrition_model.pkl', 'rb') as f:
+    model = pickle.load(f)
+
     with open('models/feature_scaler.pkl', 'rb') as f:
         scaler = pickle.load(f)
 
     with open('models/feature_names.pkl', 'rb') as f:
         feature_names = pickle.load(f)
-
     return model, scaler, feature_names
 
 model, scaler, feature_names = load_model()
