@@ -155,19 +155,33 @@ if st.button("🔍 Predict Attrition Risk"):
         """)
 
     # ===================================
-    # 🔍 SHAP Explainability
-    # ===================================
-    st.markdown("---")
-    st.header("📈 Explainability — SHAP Feature Impact")
-    explainer = shap.Explainer(model)
-    shap_values = explainer(input_scaled)
+# 🔍 SHAP Explainability (Fixed)
+# ===================================
+st.markdown("---")
+st.header("📈 Explainability — SHAP Feature Impact")
 
-    fig, ax = plt.subplots()
-    shap.waterfall_plot(shap.Explanation(values=shap_values.values[0],
-                                         base_values=shap_values.base_values[0],
-                                         data=input_df_encoded.iloc[0],
-                                         feature_names=input_df_encoded.columns))
+# Use TreeExplainer for XGBoost models
+try:
+    explainer = shap.TreeExplainer(model)
+    shap_values = explainer.shap_values(input_scaled)
+
+    # Create a waterfall or bar plot safely
+    st.subheader("Feature Contribution to Attrition Prediction")
+
+    shap_df = pd.DataFrame({
+        "Feature": input_df_encoded.columns,
+        "SHAP Value": shap_values[0]
+    }).sort_values("SHAP Value", key=abs, ascending=False)
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+    shap_df.plot(kind="barh", x="Feature", y="SHAP Value", ax=ax)
+    plt.title("Top Feature Impacts on Prediction")
     st.pyplot(fig)
+
+except Exception as e:
+    st.error("⚠️ SHAP explainability could not be generated for this model type.")
+    st.exception(e)
+
 
     # ===================================
     # 🧾 Generate Mini Report
