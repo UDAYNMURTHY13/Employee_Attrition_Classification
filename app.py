@@ -154,34 +154,6 @@ if st.button("🔍 Predict Attrition Risk"):
         - Offer leadership opportunities and learning growth.
         """)
 
-    # ===================================
-# 🔍 SHAP Explainability (Fixed)
-# ===================================
-st.markdown("---")
-st.header("📈 Explainability — SHAP Feature Impact")
-
-# Use TreeExplainer for XGBoost models
-try:
-    explainer = shap.TreeExplainer(model)
-    shap_values = explainer.shap_values(input_scaled)
-
-    # Create a waterfall or bar plot safely
-    st.subheader("Feature Contribution to Attrition Prediction")
-
-    shap_df = pd.DataFrame({
-        "Feature": input_df_encoded.columns,
-        "SHAP Value": shap_values[0]
-    }).sort_values("SHAP Value", key=abs, ascending=False)
-
-    fig, ax = plt.subplots(figsize=(8, 5))
-    shap_df.plot(kind="barh", x="Feature", y="SHAP Value", ax=ax)
-    plt.title("Top Feature Impacts on Prediction")
-    st.pyplot(fig)
-
-except Exception as e:
-    st.error("⚠️ SHAP explainability could not be generated for this model type.")
-    st.exception(e)
-
 
     # ===================================
     # 🧾 Generate Mini Report
