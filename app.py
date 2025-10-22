@@ -29,7 +29,6 @@ st.set_page_config(page_title="Employee Attrition Prediction", page_icon="💼",
 with st.sidebar:
     st.image("https://cdn-icons-png.flaticon.com/512/3135/3135715.png", width=100)
     st.title("Attrition Predictor")
-    st.markdown("### Developed by **Uday Narasimha Murthy**")
     st.markdown("Predict employee attrition likelihood with actionable HR insights.")
     st.markdown("---")
     st.markdown("**Model:** XGBoost with ADASYN balancing")
